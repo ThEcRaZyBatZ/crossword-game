@@ -155,7 +155,6 @@ for(let i=0;i<GRID_SIZE;i++){
 console.log(textArray);
 
 window.onload = () => {
-  // populate buttonArray as you already do
   for (let i = 0; i < GRID_SIZE; i++) {
     let tempArray: HTMLButtonElement[] = [];
     for (let j = 0; j < GRID_SIZE; j++) {
@@ -166,7 +165,6 @@ window.onload = () => {
     buttonArray.push(tempArray);
   }
 
-  // fill text
   for (let i = 0; i < GRID_SIZE; i++) {
     for (let j = 0; j < GRID_SIZE; j++) {
       buttonArray[i][j].innerText = textArray[i][j];
@@ -196,7 +194,6 @@ window.onload = () => {
     return false;
   };
 
-  // selection state
   let head = "";
   let curr_array: [HTMLButtonElement, Point][] = [];
   let stepDelta: [number, number] | null = null; 
@@ -279,11 +276,10 @@ window.onload = () => {
           const expectedDelta: [number, number] = [last[0] - prev[0], last[1] - prev[1]]; 
           const actualDelta: [number, number] = [i - last[0], j - last[1]];
 
-          // must continue in the same direction (same delta)
+          //same delta
           const sameDirection = (expectedDelta[0] === actualDelta[0] && expectedDelta[1] === actualDelta[1]);
 
           if (!sameDirection) {
-            // reset to this button as new start
             popAllElements(curr_array);
             activate(btn);
             head = letter;
@@ -293,7 +289,6 @@ window.onload = () => {
             return;
           }
 
-          // valid continuation
           const newHead = head + letter;
           if (isPartialWord(newHead)) {
             activate(btn);
@@ -310,7 +305,7 @@ window.onload = () => {
             stepDelta = null;
             return;
           } else {
-            // breaks matching -> reset
+            // sup krupa
             popAllElements(curr_array);
             activate(btn);
             head = letter;
