@@ -1,6 +1,15 @@
 "use strict";
 const inputArray = ["FATMAN", "HISORRY", "MERYLSTREEP", "GOURI", "SPARKLES", "MAVERICK", "YELAGIRI", "THEONES", "SMALLFINGERS", "MRUDULA", "BUTTERGARLIC", "ANIRUDH", "LALBAGH", "RAJAN", "VLADISLAV"];
 const buttonArray = [];
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+let isRambutanThere = false;
+if (getRandomInt(0, 2) % 2) {
+    inputArray.push("RAMBUTAN");
+    console.log("rambutan");
+    isRambutanThere = true;
+}
 const numberChart = {
     0: "horizontal",
     1: "vertical",
@@ -73,9 +82,6 @@ const check = (p, q, len, direction, element) => {
     }
     return false;
 };
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 inputArray.forEach(element => {
     let possible = false;
     let randomDirection = 0;
@@ -85,49 +91,45 @@ inputArray.forEach(element => {
         randomDirection = getRandomInt(0, 3);
         randomIndexI = getRandomInt(0, GRID_SIZE - 1);
         randomIndexJ = getRandomInt(0, GRID_SIZE - 1);
-        if (check(randomIndexI, randomIndexJ, element.length, randomDirection, element))
+        if (check(randomIndexI, randomIndexJ, element.length, randomDirection, element)) {
             possible = true;
+        }
     }
     let randomTextDirection = getRandomInt(0, 1);
+    const placeChar = (row, col, ch) => {
+        if (textArray[row][col] === " ") {
+            textArray[row][col] = ch;
+        }
+    };
     switch (randomDirection) {
         case 0: // horizontal
             for (let i = 0; i < element.length; i++) {
-                if (!randomTextDirection) {
-                    textArray[randomIndexI][randomIndexJ + i] = element[i];
-                }
-                else {
-                    textArray[randomIndexI][randomIndexJ + i] = element[element.length - i - 1];
-                }
+                const col = randomIndexJ + i;
+                const ch = randomTextDirection ? element[element.length - i - 1] : element[i];
+                placeChar(randomIndexI, col, ch);
             }
             break;
         case 1: // vertical
             for (let i = 0; i < element.length; i++) {
-                if (!randomTextDirection) {
-                    textArray[randomIndexI + i][randomIndexJ] = element[i];
-                }
-                else {
-                    textArray[randomIndexI + i][randomIndexJ] = element[element.length - i - 1];
-                }
+                const row = randomIndexI + i;
+                const ch = randomTextDirection ? element[element.length - i - 1] : element[i];
+                placeChar(row, randomIndexJ, ch);
             }
             break;
         case 2: // diagonal right
             for (let i = 0; i < element.length; i++) {
-                if (!randomTextDirection) {
-                    textArray[randomIndexI + i][randomIndexJ + i] = element[i];
-                }
-                else {
-                    textArray[randomIndexI + i][randomIndexJ + i] = element[element.length - i - 1];
-                }
+                const row = randomIndexI + i;
+                const col = randomIndexJ + i;
+                const ch = randomTextDirection ? element[element.length - i - 1] : element[i];
+                placeChar(row, col, ch);
             }
             break;
         case 3: // diagonal left
             for (let i = 0; i < element.length; i++) {
-                if (!randomTextDirection) {
-                    textArray[randomIndexI + i][randomIndexJ - i] = element[i];
-                }
-                else {
-                    textArray[randomIndexI + i][randomIndexJ - i] = element[element.length - i - 1];
-                }
+                const row = randomIndexI + i;
+                const col = randomIndexJ - i;
+                const ch = randomTextDirection ? element[element.length - i - 1] : element[i];
+                placeChar(row, col, ch);
             }
             break;
     }
@@ -179,6 +181,10 @@ window.onload = () => {
         return false;
     };
     const isCompleteWord = (s) => {
+        if (s == "RAMBUTAN") {
+            alert("AYO YOU FOUND IT");
+            return true;
+        }
         for (const w of inputArray) {
             if (w === s)
                 return true;
@@ -188,7 +194,6 @@ window.onload = () => {
         }
         return false;
     };
-    // selection state
     let head = "";
     let curr_array = [];
     let stepDelta = null;
@@ -272,10 +277,8 @@ window.onload = () => {
                     const prev = curr_array[curr_array.length - 2][1];
                     const expectedDelta = [last[0] - prev[0], last[1] - prev[1]];
                     const actualDelta = [i - last[0], j - last[1]];
-                    // must continue in the same direction (same delta)
                     const sameDirection = (expectedDelta[0] === actualDelta[0] && expectedDelta[1] === actualDelta[1]);
                     if (!sameDirection) {
-                        // reset to this button as new start
                         popAllElements(curr_array);
                         activate(btn);
                         head = letter;
@@ -289,7 +292,6 @@ window.onload = () => {
                         }
                         return;
                     }
-                    // valid continuation
                     const newHead = head + letter;
                     if (isPartialWord(newHead)) {
                         activate(btn);
@@ -313,7 +315,6 @@ window.onload = () => {
                         return;
                     }
                     else {
-                        // breaks matching -> reset
                         popAllElements(curr_array);
                         activate(btn);
                         head = letter;
