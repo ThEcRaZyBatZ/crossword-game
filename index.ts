@@ -170,7 +170,6 @@ for(let i=0;i<GRID_SIZE;i++){
 console.log(textArray);
 
 window.onload = () => {
-  // populate buttonArray as you already do
   for (let i = 0; i < GRID_SIZE; i++) {
     let tempArray: HTMLButtonElement[] = [];
     for (let j = 0; j < GRID_SIZE; j++) {
@@ -181,7 +180,6 @@ window.onload = () => {
     buttonArray.push(tempArray);
   }
 
-  // fill text
   for (let i = 0; i < GRID_SIZE; i++) {
     for (let j = 0; j < GRID_SIZE; j++) {
       buttonArray[i][j].innerText = textArray[i][j];
@@ -298,7 +296,6 @@ window.onload = () => {
           const actualDelta: [number, number] = [i - last[0], j - last[1]];
 
           const sameDirection = (expectedDelta[0] === actualDelta[0] && expectedDelta[1] === actualDelta[1]);
-
           if (!sameDirection) {
             popAllElements(curr_array);
             activate(btn);
@@ -326,6 +323,7 @@ window.onload = () => {
             return;
           } else {
             popAllElements(curr_array);
+            //sup krupa
             activate(btn);
             head = letter;
             curr_array = [[btn, [i, j]]];
