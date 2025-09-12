@@ -8,6 +8,8 @@ let isRambutanThere = false;
 if (getRandomInt(0, 2) % 2) {
     inputArray.push("RAMBUTAN");
     console.log("rambutan");
+    const title = document.getElementById('title');
+    title.innerText += "*";
     isRambutanThere = true;
 }
 const numberChart = {
@@ -149,7 +151,6 @@ for (let i = 0; i < GRID_SIZE; i++) {
 }
 console.log(textArray);
 window.onload = () => {
-    // populate buttonArray as you already do
     for (let i = 0; i < GRID_SIZE; i++) {
         let tempArray = [];
         for (let j = 0; j < GRID_SIZE; j++) {
@@ -159,7 +160,6 @@ window.onload = () => {
         }
         buttonArray.push(tempArray);
     }
-    // fill text
     for (let i = 0; i < GRID_SIZE; i++) {
         for (let j = 0; j < GRID_SIZE; j++) {
             buttonArray[i][j].innerText = textArray[i][j];
@@ -316,6 +316,7 @@ window.onload = () => {
                     }
                     else {
                         popAllElements(curr_array);
+                        //sup krupa
                         activate(btn);
                         head = letter;
                         curr_array = [[btn, [i, j]]];
