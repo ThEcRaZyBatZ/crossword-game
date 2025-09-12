@@ -11,6 +11,8 @@ let isRambutanThere:boolean=false;
 if(getRandomInt(0,2)%2){
   inputArray.push("RAMBUTAN");
   console.log("rambutan");
+  const title=document.getElementById('title') as HTMLHeadingElement;
+  title.innerText+="*";
   isRambutanThere=true;
 }
 
