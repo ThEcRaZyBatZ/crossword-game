@@ -1,13 +1,13 @@
 "use strict";
-const inputArray = ["FATMAN", "HISORRY", "MERYLSTREEP", "GOURI", "SPARKLES", "MAVERICK", "YELAGIRI", "THEONES", "SMALLFINGERS", "MRUDULA", "BUTTERGARLIC", "ANIRUDH", "LALBAGH", "RAJAN", "VLADISLAV"];
+const inputArray = ["CHICKIN", "THRILLSPRINT", "SPORK", "TARA", "MADRAS", "PRPCLOCK", "CUPANDSAUCER", "KUDUMBASTHAN", "KALINJUR", "THENOVICE", "MRUDULA", "AYUSH", "ISKCON", "ORION", "RAMBUTAN"];
 const buttonArray = [];
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 let isRambutanThere = false;
 if (getRandomInt(0, 2) % 2) {
-    inputArray.push("RAMBUTAN");
-    console.log("rambutan");
+    inputArray.push("COW");
+    console.log("cow");
     const title = document.getElementById('title');
     title.innerText += "*";
     isRambutanThere = true;

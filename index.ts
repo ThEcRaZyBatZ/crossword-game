@@ -1,4 +1,4 @@
-const inputArray: string[] = ["FATMAN", "HISORRY", "MERYLSTREEP", "GOURI","SPARKLES","MAVERICK","YELAGIRI","THEONES","SMALLFINGERS","MRUDULA","BUTTERGARLIC","ANIRUDH","LALBAGH","RAJAN","VLADISLAV"];
+const inputArray: string[] = ["CHICKIN", "THRILLSPRINT", "SPORK", "TARA","MADRAS","PRPCLOCK","CUPANDSAUCER","KUDUMBASTHAN","KALINJUR","THENOVICE","MRUDULA","AYUSH","ISKCON","ORION","RAMBUTAN"];
 
 
 const buttonArray: HTMLButtonElement[][] = [];
@@ -9,8 +9,8 @@ function getRandomInt(min: number, max: number): number {
 
 let isRambutanThere:boolean=false;
 if(getRandomInt(0,2)%2){
-  inputArray.push("RAMBUTAN");
-  console.log("rambutan");
+  inputArray.push("COW");
+  console.log("cow");
   const title=document.getElementById('title') as HTMLHeadingElement;
   title.innerText+="*";
   isRambutanThere=true;
